@@ -12,6 +12,11 @@ class Board
 
   def populate
     @grid.map! { |tile| tile = Tile.new(self) }
+    populate_bombs
+    populate_non_bombs
+  end
+
+  def populate_bombs
     num_bombs = ( size ** 2 ) / 4
     num_bombs.times do
       row = rand(size)
@@ -22,9 +27,10 @@ class Board
       end
       board[row, col] = true
     end
+  end
 
-
-
+  def populate_non_bombs
+    @grid.map! { |tile| tile.neighbor_bomb_count unless tile.bombed? }
   end
 
   def [](pos)
