@@ -8,7 +8,7 @@ class Minesweeper
   def run
     board.create_grid
     board.populate
-    play until game_over?
+    # play until game_over?
 
   end
 
